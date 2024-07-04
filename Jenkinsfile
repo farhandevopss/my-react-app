@@ -4,7 +4,17 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', credentialsId: '1214', url: 'https://github.com/farhandevopss/my-react-app.git'
+		checkout([
+                    $class: 'GitSCM', 
+                    branches: [[name: '*/main']],
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [[
+                        credentialsId: '1214', 
+                        url: 'https://github.com/farhandevopss/my-react-app.git'
+                    ]]
+                ])
             }
         }
 
